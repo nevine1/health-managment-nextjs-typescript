@@ -16,7 +16,7 @@ import {
 import { Input } from "@/components/ui/input"
 import CustomFormField from "./formsCustomFields/CustomFormField"
 import { FormFieldType } from "../../types/page"
-
+import  SubmitButton from './formsCustomFields/SubmitButton'
 const formSchema = z.object({
   username: z.string().min(2, {
     message: "Username must be at least 2 characters.",
@@ -24,7 +24,7 @@ const formSchema = z.object({
 })
 
 interface Props{
-
+  
 }
 
 
@@ -54,8 +54,30 @@ const PatientForm = (props: Props) => {
         <CustomFormField
           control={form.control}
           fieldType={FormFieldType.INPUT}
+          name="name"
+          label="Full name"
+          placeholder = "John Mrk"
+          iconSrc="../../../public/assets/icons/user.svg"
+          iconAlt="user"
         />
-        <Button type="submit">Submit</Button>
+        <CustomFormField
+          control={form.control}
+          fieldType={FormFieldType.INPUT}
+          name="email"
+          label="Email"
+          placeholder = "Johnmark@email.com"
+          iconSrc="../../../public/assets/icons/email.svg"
+          iconAlt="email"
+        />
+         <CustomFormField
+          control={form.control}
+          fieldType={FormFieldType.PHONE_INPUT }
+          name="phone #"
+          label="phone #"
+          placeholder = "(555) 555-0000"
+         
+        />
+        <SubmitButton />
       </form>
     </Form>
   )

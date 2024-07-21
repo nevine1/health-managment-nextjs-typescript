@@ -10,8 +10,8 @@ export default function Home() {
         <div className="max-w-[496px] flex flex-col mx-auto py-10 size-full">
           <Image src={Logo} alt="patient" width={1000} height={1000} className="w-fit mb-12 h-10"/>
 
-          <div className="max-md:w-full max-width-[70%]">
-            <PatientForm/>
+          <div className="max-md:w-full max-width-[50%] flex-1">
+            <PatientForm />
           </div>
 
           <div className="text-14-regular flex flex-between mt-20">

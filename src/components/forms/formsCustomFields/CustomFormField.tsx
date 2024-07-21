@@ -14,22 +14,22 @@ import { FormFieldType, CustomFieldProps } from '../../../types/page'
   
 
 
- const CustomFormField = ({control, fieldType}: CustomFieldProps) => {
+ const CustomFormField = ({control, fieldType, label, name, placeholder}: CustomFieldProps) => {
     return (
         <div>
             <FormField
                 control={control}
-                name="username"
+                name={name}
                 render={({ field }) => (
                     <FormItem>
-                    <FormLabel>{label}</FormLabel>
-                    <FormControl>
-                        <Input placeholder="shadcn" {...field} />
-                    </FormControl>
-                    <FormDescription>
-                        This is your public display name.
-                    </FormDescription>
-                    <FormMessage />
+                        <FormLabel>{label}</FormLabel>
+                        <FormControl>
+                            <Input placeholder={placeholder} {...field} />
+                        </FormControl>
+                        {/* <FormDescription>
+                            This is your public display name.
+                        </FormDescription> */}
+                        <FormMessage />
                     </FormItem>
                 )}
                 />
@@ -38,3 +38,16 @@ import { FormFieldType, CustomFieldProps } from '../../../types/page'
 }
 
 export default CustomFormField; 
+
+
+
+{/* <FormItem>
+    <FormLabel>{label}</FormLabel>
+    <FormControl>
+        <Input placeholder="shadcn" {...field} />
+    </FormControl>
+    <FormDescription>
+       This is your public display name.
+    </FormDescription>
+    <FormMessage />
+</FormItem> */}
