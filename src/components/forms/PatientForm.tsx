@@ -1,9 +1,8 @@
 "use client"
- 
+import { useState } from 'react'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { Button } from "@/components/ui/button"
+import { z } from "zod";
 import {
   Form,
   FormControl,
@@ -16,12 +15,9 @@ import {
 import { Input } from "@/components/ui/input"
 import CustomFormField from "./formsCustomFields/CustomFormField"
 import { FormFieldType } from "../../types/page"
-import  SubmitButton from './formsCustomFields/SubmitButton'
-const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-})
+import SubmitButton from './formsCustomFields/SubmitButton';
+import { formSchema } from '../../lib/validation'
+
 
 interface Props{
   
@@ -29,6 +25,8 @@ interface Props{
 
 
 const PatientForm = (props: Props) => {
+  const [isLoading, setIsLoading] = useState(false)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -77,7 +75,7 @@ const PatientForm = (props: Props) => {
           placeholder = "(555) 555-0000"
          
         />
-        <SubmitButton />
+        <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
       </form>
     </Form>
   )
