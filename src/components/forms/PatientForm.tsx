@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input"
 import CustomFormField from "./formsCustomFields/CustomFormField"
 import { FormFieldType } from "../../types/page"
 import SubmitButton from './formsCustomFields/SubmitButton';
-import { formSchema } from '../../lib/validation'
+import { UserFormValidation } from '../../lib/validation'
 
 
 interface Props{
@@ -27,15 +27,15 @@ interface Props{
 const PatientForm = (props: Props) => {
   const [isLoading, setIsLoading] = useState(false)
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof UserFormValidation>>({
+    resolver: zodResolver(UserFormValidation),
     defaultValues: {
       username: "",
     },
   })
 
   
-   const onSubmit = (values: z.infer<typeof formSchema>) => {
+   const onSubmit = (values: z.infer<typeof UserFormValidation>) => {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values)
