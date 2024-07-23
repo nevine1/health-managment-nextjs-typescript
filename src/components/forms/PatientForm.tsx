@@ -17,7 +17,7 @@ import CustomFormField from "./formsCustomFields/CustomFormField"
 import { FormFieldType } from "../../types/page"
 import SubmitButton from './formsCustomFields/SubmitButton';
 import { UserFormValidation } from '../../lib/validation'
-
+import { useRouter } from 'next/navigation';
 
 interface Props{
   
@@ -25,20 +25,33 @@ interface Props{
 
 
 const PatientForm = (props: Props) => {
+  const router = useRouter(); 
   const [isLoading, setIsLoading] = useState(false)
 
   const form = useForm<z.infer<typeof UserFormValidation>>({
     resolver: zodResolver(UserFormValidation),
     defaultValues: {
       username: "",
+      email: "", 
+      phone: "", 
     },
   })
 
   
-   const onSubmit = (values: z.infer<typeof UserFormValidation>) => {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
+   const onSubmit = async ({username, email, phone}: z.infer<typeof UserFormValidation>) => {
+    setIsLoading(true);
+    
+    try{
+
+      const userData = {username, email, phone};
+      const user = await createUser(userData);
+      if(user) router.push(`/patients/${user.id}/register`)
+      
+    }catch(error){
+      console.log(error);
+    }
+
+
   }
 
 
@@ -70,8 +83,8 @@ const PatientForm = (props: Props) => {
          <CustomFormField
           control={form.control}
           fieldType={FormFieldType.PHONE_INPUT }
-          name="phone #"
-          label="phone #"
+          name="phone"
+          label="phone"
           placeholder = "(555) 555-0000"
          
         />
