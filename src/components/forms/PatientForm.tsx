@@ -1,97 +1,143 @@
 "use client"
-import { useState } from 'react'
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import CustomFormField from "./formsCustomFields/CustomFormField"
-import { FormFieldType } from "../../types/page"
-import SubmitButton from './formsCustomFields/SubmitButton';
-import { UserFormValidation } from '../../lib/validation'
-import { useRouter } from 'next/navigation';
+import React from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import validationSchema from '../../lib/validationSchema';
+import { createAccount } from "../../lib/actions/createAccount"
 
-interface Props{
-  
+interface FormValues {
+  username: string;
+  email: string;
+  phone: string;
 }
 
-
-const PatientForm = (props: Props) => {
-  const router = useRouter(); 
-  const [isLoading, setIsLoading] = useState(false)
-
-  const form = useForm<z.infer<typeof UserFormValidation>>({
-    resolver: zodResolver(UserFormValidation),
-    defaultValues: {
-      username: "",
-      email: "", 
-      phone: "", 
-    },
-  })
+const PatientForm: React.FC = () => {
+  const initialValues: FormValues = {
+    username: '',
+    email: '',
+    phone: '',
+  };
 
   
-   const onSubmit = async ({username, email, phone}: z.infer<typeof UserFormValidation>) => {
-    setIsLoading(true);
-    
-    try{
-
-      const userData = {username, email, phone};
-      const user = await createUser(userData);
-      if(user) router.push(`/patients/${user.id}/register`)
+  const handleSubmit = async (values: FormValues, { setSubmitting }: any) => {
+    try {
+     
+   const newAccount = await createAccount({
+        email: values.email,
+        phone: values.phone,
+        name: values.username,
+      });
       
-    }catch(error){
-      console.log(error);
+      if (newAccount) {
+        alert('User registered successfully');
+        console.log(newAccount);
+      } else {
+        alert('User registration failed');
+      }
+    } catch (error) {
+      console.error("Handle Submit Error:", error);
+      alert('Failed to register user');
+    } finally {
+      setSubmitting(false);
     }
-
-
-  }
-
+  };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
-        <section className="space-y-4 mb-12">
-          <h1 className="text-32-bold md:text-36-bold">Hi There,</h1>
-          <p className="text-dark-700">Book your first appointment</p>
-        </section>
-        <CustomFormField
-          control={form.control}
-          fieldType={FormFieldType.INPUT}
-          name="name"
-          label="Full name"
-          placeholder = "John Mrk"
-          iconSrc="../../../public/assets/icons/user.svg"
-          iconAlt="user"
-        />
-        <CustomFormField
-          control={form.control}
-          fieldType={FormFieldType.INPUT}
-          name="email"
-          label="Email"
-          placeholder = "Johnmark@email.com"
-          iconSrc="../../../public/assets/icons/email.svg"
-          iconAlt="email"
-        />
-         <CustomFormField
-          control={form.control}
-          fieldType={FormFieldType.PHONE_INPUT }
-          name="phone"
-          label="phone"
-          placeholder = "(555) 555-0000"
-         
-        />
-        <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
-      </form>
-    </Form>
-  )
-}
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh',
+        backgroundColor: '#f3f4f6',
+      }}
+    >
+      <Box
+        sx={{
+          width: '100%',
+          maxWidth: '400px',
+          backgroundColor: 'white',
+          padding: '24px',
+          borderRadius: '8px',
+          boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+        }}
+      >
+        <Typography component="h1" variant="h5" align="center" gutterBottom>
+          Register
+        </Typography>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ isSubmitting, handleChange, handleBlur, values, touched, errors }) => (
+            <Form>
+              <Box mb={2}>
+                <TextField
+                  fullWidth
+                  id="username"
+                  name="username"
+                  label="Username"
+                  variant="outlined"
+                  value={values.username}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={touched.username && Boolean(errors.username)}
+                  helperText={touched.username && errors.username}
+                />
+              </Box>
 
-export default  PatientForm;
+              <Box mb={2}>
+                <TextField
+                  fullWidth
+                  id="email"
+                  name="email"
+                  label="Email"
+                  variant="outlined"
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={touched.email && Boolean(errors.email)}
+                  helperText={touched.email && errors.email}
+                />
+              </Box>
+
+              <Box mb={2}>
+                <TextField
+                  fullWidth
+                  id="phone"
+                  name="phone"
+                  label="phone"
+                  type="phone"
+                  variant="outlined"
+                  value={values.phone}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={touched.phone && Boolean(errors.phone)}
+                  helperText={touched.phone && errors.phone}
+                />
+              </Box>
+
+              <Box display="flex" justifyContent="center">
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  disabled={isSubmitting}
+                >
+                  Register
+                </Button>
+              </Box>
+            </Form>
+          )}
+        </Formik>
+      </Box>
+    </Box>
+  );
+};
+
+export default PatientForm;
