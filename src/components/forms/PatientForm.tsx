@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import validationSchema from '../../lib/validationSchema';
 import { createAccount } from "../../lib/actions/createAccount"
+import { useRouter } from 'next/navigation'
 
 interface FormValues {
   username: string;
@@ -15,6 +16,7 @@ interface FormValues {
 }
 
 const PatientForm: React.FC = () => {
+  const route = useRouter();
   const initialValues: FormValues = {
     username: '',
     email: '',
@@ -25,15 +27,16 @@ const PatientForm: React.FC = () => {
   const handleSubmit = async (values: FormValues, { setSubmitting }: any) => {
     try {
      
-   const newAccount = await createAccount({
-        email: values.email,
-        phone: values.phone,
-        name: values.username,
-      });
-      
-      if (newAccount) {
+      const user = await createAccount({
+            email: values.email,
+            phone: values.phone,
+            name: values.username,
+          });
+          
+      if (user) {
         alert('User registered successfully');
-        console.log(newAccount);
+        console.log(user);
+        route.push(`/patients/${user.userId}/register`)
       } else {
         alert('User registration failed');
       }

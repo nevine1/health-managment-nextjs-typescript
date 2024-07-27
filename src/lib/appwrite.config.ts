@@ -2,8 +2,8 @@
 import * as sdk from "node-appwrite"
 import { Client, Account } from 'node-appwrite';
 
-const {
-        PROJECT_ID,
+export const {
+        NEXT_PUBLIC_APPWRITE_PROJECT_ID,
         API_KEY,
         DATABASE_ID ,
         PATIENT_COLLECTION_ID,
@@ -13,6 +13,7 @@ const {
         NEXT_PUBLIC_ENDPOINT: ENDPOINT
     } = process.env
 
+const projectID = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID;
     /* const client = new sdk.Client();
 
     client
@@ -32,13 +33,11 @@ export const messaging = new sdk.Messaging(client);
 export const users = new sdk.Users(client); */
 
 
+const client = new Client()
+    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
+    .setProject(projectID!); 
 
 
-const client = new Client();
-
-client
-  .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite endpoint
-  .setProject(PROJECT_ID!); // Your project ID
 
 const account = new Account(client);
 
