@@ -3,7 +3,7 @@ import React from 'react'
 import Logo from '../../../../../public/assets/icons/logo-full.svg'
 import Image from 'next/image'
 import Link from 'next/link'
-import RegisterForm from '@/components/forms/RegisterForm'
+import RegisterForm from '@/components/forms/Register'
 type Props = {}
 
 const Register = (props: Props) => {

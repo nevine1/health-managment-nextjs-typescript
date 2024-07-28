@@ -6,8 +6,9 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import validationSchema from '../../lib/validationSchema';
-import { createAccount } from "../../lib/actions/createAccount"
+
 import { useRouter } from 'next/navigation'
+import { getUser} from '../../lib/actions/createAccount'
 
 interface FormValues {
   username: string;
@@ -15,7 +16,10 @@ interface FormValues {
   phone: string;
 }
 
-const RegisterForm: React.FC = () => {
+const RegisterForm: React.FC = ({params: {userId}} : SearchParamProps) => {
+  
+  console.log('user id is ');
+  console.log(userId)
   const route = useRouter();
   const initialValues: FormValues = {
     username: '',

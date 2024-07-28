@@ -56,18 +56,21 @@ const PatientForm: React.FC = () => {
         alignItems: 'center',
         justifyContent: 'center',
         minHeight: '100vh',
-        backgroundColor: '#f3f4f6',
+        border:'white',
+        /* backgroundColor: '#201E43', */
       }}
     >
       <Box
         sx={{
           width: '100%',
           maxWidth: '400px',
-          backgroundColor: 'white',
+          /* backgroundColor: 'white', */
           padding: '24px',
           borderRadius: '8px',
           boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+          backgroundColor: '#232c3e'
         }}
+        className=" border-white "
       >
         <Typography component="h1" variant="h5" align="center" gutterBottom>
           Register
@@ -78,19 +81,22 @@ const PatientForm: React.FC = () => {
           onSubmit={handleSubmit}
         >
           {({ isSubmitting, handleChange, handleBlur, values, touched, errors }) => (
-            <Form>
+            <Form className="p-2 rounded-md border-white ">
               <Box mb={2}>
                 <TextField
                   fullWidth
                   id="username"
                   name="username"
                   label="Username"
-                  variant="outlined"
+                  variant="filled"
                   value={values.username}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   error={touched.username && Boolean(errors.username)}
                   helperText={touched.username && errors.username}
+                  className="bg-slate-600 p-2 text-white text-[20px] border-full"
+                  /* sx={{padding: '10px', margin: '20px'}} */
+                  
                 />
               </Box>
 
