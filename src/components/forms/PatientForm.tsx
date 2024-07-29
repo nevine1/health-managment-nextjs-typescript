@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import validationSchema from '../../lib/validationSchema';
 import { createAccount } from "../../lib/actions/createAccount"
 import { useRouter } from 'next/navigation'
-
+import CustomTextField from './formsCustomFields/CustomTextField';
 interface FormValues {
   username: string;
   email: string;
@@ -55,24 +55,25 @@ const PatientForm: React.FC = () => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        minHeight: '100vh',
+        maxHeight: '100vh',
         border:'white',
-        /* backgroundColor: '#201E43', */
       }}
     >
       <Box
         sx={{
           width: '100%',
           maxWidth: '400px',
-          /* backgroundColor: 'white', */
           padding: '24px',
           borderRadius: '8px',
           boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
-          backgroundColor: '#232c3e'
+          backgroundColor: '#eff0f2'
         }}
         className=" border-white "
       >
-        <Typography component="h1" variant="h5" align="center" gutterBottom>
+        <Typography component="h1" variant="h5" align="center" 
+          gutterBottom
+          className="text-slate-900 text-[22px]"
+          >
           Register
         </Typography>
         <Formik
@@ -88,15 +89,14 @@ const PatientForm: React.FC = () => {
                   id="username"
                   name="username"
                   label="Username"
-                  variant="filled"
+                  variant="standard"
+                 /*  size="small" */
                   value={values.username}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   error={touched.username && Boolean(errors.username)}
                   helperText={touched.username && errors.username}
-                  className="bg-slate-600 p-2 text-white text-[20px] border-full"
-                  /* sx={{padding: '10px', margin: '20px'}} */
-                  
+                 
                 />
               </Box>
 
@@ -106,7 +106,7 @@ const PatientForm: React.FC = () => {
                   id="email"
                   name="email"
                   label="Email"
-                  variant="outlined"
+                  variant="standard"
                   value={values.email}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -122,7 +122,7 @@ const PatientForm: React.FC = () => {
                   name="phone"
                   label="phone"
                   type="phone"
-                  variant="outlined"
+                  variant="standard"
                   value={values.phone}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -130,13 +130,15 @@ const PatientForm: React.FC = () => {
                   helperText={touched.phone && errors.phone}
                 />
               </Box>
-
-              <Box display="flex" justifyContent="center">
+              
+              <Box display="flex" justifyContent="center" className="w-full">
                 <Button
                   type="submit"
                   variant="contained"
                   color="primary"
+                  size="larg"
                   disabled={isSubmitting}
+                  className="w-full"
                 >
                   Register
                 </Button>

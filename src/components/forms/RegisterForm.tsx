@@ -1,4 +1,4 @@
-"use client"
+
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import TextField from '@mui/material/TextField';
@@ -6,9 +6,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import validationSchema from '../../lib/validationSchema';
-
-import { useRouter } from 'next/navigation'
-import { getUser} from '../../lib/actions/createAccount'
+import { getUser } from '@/lib/actions/patient.actions';
 
 interface FormValues {
   username: string;
@@ -16,11 +14,11 @@ interface FormValues {
   phone: string;
 }
 
-const RegisterForm: React.FC = ({params: {userId}} : SearchParamProps) => {
-  
-  console.log('user id is ');
-  console.log(userId)
-  const route = useRouter();
+const RegisterForm = ({user}: {user: User}) => {
+/*   const  userId  = useParams(); */
+ 
+
+
   const initialValues: FormValues = {
     username: '',
     email: '',
@@ -59,22 +57,38 @@ const RegisterForm: React.FC = ({params: {userId}} : SearchParamProps) => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        minHeight: '100vh',
-        backgroundColor: '#f3f4f6',
+        maxHeight: '100vh',
+        border:'white',
       }}
     >
       <Box
         sx={{
           width: '100%',
           maxWidth: '400px',
-          backgroundColor: 'white',
           padding: '24px',
           borderRadius: '8px',
           boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+          backgroundColor: '#eff0f2'
         }}
+        className=" border-white "
       >
-        <Typography component="h1" variant="h5" align="center" gutterBottom>
-          Register
+        <Typography component="h1" variant="h5" align="center" 
+          gutterBottom
+          className="text-slate-900 text-[28px]"
+          >
+         Welcome
+        </Typography>
+        <Typography  align="center" 
+          gutterBottom
+          className="text-slate-900 text-[20px]"
+          >
+          Let's us know about you; 
+        </Typography>
+        <Typography component="h1" variant="h5" align="center" 
+          gutterBottom
+          className=" text-[18px] text-pink-600 text-semibold"
+          >
+          Personal information 
         </Typography>
         <Formik
           initialValues={initialValues}
@@ -82,19 +96,21 @@ const RegisterForm: React.FC = ({params: {userId}} : SearchParamProps) => {
           onSubmit={handleSubmit}
         >
           {({ isSubmitting, handleChange, handleBlur, values, touched, errors }) => (
-            <Form>
+            <Form className="p-2 rounded-md border-white ">
               <Box mb={2}>
                 <TextField
                   fullWidth
                   id="username"
                   name="username"
                   label="Username"
-                  variant="outlined"
+                  variant="standard"
+                 /*  size="small" */
                   value={values.username}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   error={touched.username && Boolean(errors.username)}
                   helperText={touched.username && errors.username}
+                 
                 />
               </Box>
 
@@ -104,7 +120,7 @@ const RegisterForm: React.FC = ({params: {userId}} : SearchParamProps) => {
                   id="email"
                   name="email"
                   label="Email"
-                  variant="outlined"
+                  variant="standard"
                   value={values.email}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -120,7 +136,7 @@ const RegisterForm: React.FC = ({params: {userId}} : SearchParamProps) => {
                   name="phone"
                   label="phone"
                   type="phone"
-                  variant="outlined"
+                  variant="standard"
                   value={values.phone}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -128,13 +144,15 @@ const RegisterForm: React.FC = ({params: {userId}} : SearchParamProps) => {
                   helperText={touched.phone && errors.phone}
                 />
               </Box>
-
-              <Box display="flex" justifyContent="center">
+              
+              <Box display="flex" justifyContent="center" className="w-full">
                 <Button
                   type="submit"
                   variant="contained"
                   color="primary"
+                  size="larg"
                   disabled={isSubmitting}
+                  className="w-full"
                 >
                   Register
                 </Button>

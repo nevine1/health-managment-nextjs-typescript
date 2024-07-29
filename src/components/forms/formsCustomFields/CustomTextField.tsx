@@ -40,7 +40,8 @@ const CustomTextField = ({
       onBlur={onBlur}
       error={error}
       helperText={helperText}
-    
+      sx={{color: 'white', fontSize:'40px', backgroundColor: 'pink'}}
+      className="text-white text-[20px] rounded-lg px-2  py-2 my-2 bg-red-600 border-white"
     />
   );
 };
