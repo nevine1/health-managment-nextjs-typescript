@@ -15,7 +15,7 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
   return (
     <div className="flex h-screen max-h-screen ">
       <section className="remove-scrollbar container my-auto">
-        <div className="max-w-[496px] flex flex-col mx-auto py-10 size-full">
+        <div className="max-w-[70%] flex flex-col mx-auto py-10 size-full">
           <Image 
             src={Logo}
             alt="patient" 
@@ -24,7 +24,7 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
             height={1000} 
             className="w-fit mb-12 h-10"/>
 
-          <div className="max-md:w-full max-width-[50%] flex-1">
+          <div className=" ">
             <RegisterForm user={user}/>
           </div>
 
@@ -40,10 +40,10 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
           </div>
         </div>
       </section>
-      <Image src={RegImg} alt="Patient"
+     {/*  <Image src={RegImg} alt="Patient"
         width={800} height={1000}
         className="max-width-[390px] sm:hidden h-full object-cover md:block "
-      />
+      /> */}
     </div>
   );
 }
