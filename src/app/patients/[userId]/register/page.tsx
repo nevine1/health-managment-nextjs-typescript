@@ -9,8 +9,8 @@ import { getUser } from '@/lib/actions/patient.actions'
 import { useSearchParams } from 'next/navigation'
 type Props = {}
 
-const Register = async ({ params: { userId } }: SearchParamProps) => {
-  const user = await  getUser(userId)
+const Register = ({ params: { userId } }: SearchParamProps) => {
+  const user = getUser(userId)
   console.log(user)
   return (
     <div className="flex h-screen max-h-screen ">
