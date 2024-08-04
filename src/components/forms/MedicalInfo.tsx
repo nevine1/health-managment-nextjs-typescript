@@ -11,7 +11,7 @@ interface PropsValues{
  const MedicalInfo = ({values, handleChange, handleBlur, touched, errors}) => {
     const [ selectedValue, setSelectedValue ] = useState('John Green')
   return (
-    <div className="">
+    <div className="border-4 border-solid border-gray-00 p-4 mb-4 rounded-lg">
         <div className="col-span-full flex justify-center mt-4 ">
             <h2 className="text-center text-[20px] text-pink-700 font-semibold">
                 Medical information
@@ -132,7 +132,7 @@ interface PropsValues{
                     error={touched.identificationType && Boolean(errors.identificationType)}
                     helperText={touched.identificationType && errors.identificationType}
                   />
-                  
+
                 <TextField
                     id="identificationNumber"
                     name="identificationNumber"

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { TextField, FormLabel, Button, Box, Typography, Radio, 
     FormControlLabel, RadioGroup, FormControl, Select, MenuItem,
-    OutlinedInput, MenuProps
+    OutlinedInput, MenuProps, Checkbox
   } from '@mui/material';
 
 import validationSchema from '../../lib/validationSchema';
@@ -28,6 +28,7 @@ const RegisterForm = () => {
   const [genderValue, setGenderValue] = useState('female');
   const [selectedDate, setSelectedDate ] = useState('')
   const [startDate, setStartDate] = useState(new Date());
+  const [checked, setChecked] = useState(true)
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGenderValue((event.target as HTMLInputElement).value);
   };
@@ -75,7 +76,7 @@ const handleSubmit = () =>{
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        maxHeight: '100vh',
+    /*     maxHeight: '100vh', */
         border:'white',
       }}
       >
@@ -144,7 +145,29 @@ const handleSubmit = () =>{
                   errors={errors}
                   /> 
                 </section>
-
+                {/* final check box  */}
+                <FormControlLabel  
+                  className="text-gray-900 text-[15px] mt-5"
+                    control={
+                      <Checkbox
+                        checked={checked}
+                        onChange={(e) =>setChecked(e.target.checked)}
+                        size="small"
+                      />
+                    }
+                    label="I consent to receive treatment for my health condition"
+                  />
+                  <FormControlLabel  
+                      className="text-gray-900 text-[15px] mt-3"
+                      control={
+                      <Checkbox
+                        checked={checked}
+                        onChange={(e) =>setChecked(e.target.checked)}
+                        size="small"
+                      />
+                    }
+                    label="I acknowledge that I have reviewed and agree to the privacy policy"
+                  />
                 <div className="w-full flex justify-center my-4">
                   <Button
                     type="submit"

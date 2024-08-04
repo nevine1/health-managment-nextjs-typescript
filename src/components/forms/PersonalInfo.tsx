@@ -31,9 +31,7 @@ const handleSubmit = () =>{
   console.log('ehllo form ')
 }
   return (
-    
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border-4 border-solid border-gray-00 p-4 mb-4 rounded-lg">
                   <div className="col-span-full flex justify-center ">
                     <h2 className="text-center text-[20px] text-pink-700 font-semibold">
                       Personal information
