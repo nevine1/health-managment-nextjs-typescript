@@ -13,16 +13,8 @@ import { getUser } from '@/lib/actions/patient.actions';
 import MedicalInfo from './MedicalInfo';
 import Identification from './Identification';
 import PersonalInfo from './PersonalInfo';
-
-interface FormValues {
-  username: string;
-  email: string;
-  phone: string;
-  address: string; // New field for example
-  city: string;    // New field for example
-  dob: string;
-}
-
+import { FormValues } from '../../types/page'
+import { initialValues } from '../RegisterAction';
 const RegisterForm = () => {
 
   const [genderValue, setGenderValue] = useState('female');
@@ -34,14 +26,27 @@ const RegisterForm = () => {
   };
 
 
-  const initialValues: FormValues = {
+  /* const initialValues: FormValues = {
     username: '',
     email: '',
     phone: '',
-    address: '',  // Initialize new field
     city: '',     // Initialize new field
-    dob: ''
-  };
+    birthday:'',
+    gender: " ",
+    address: " ",
+    emergencyContactName: " ",
+    emergencyContactNumber: null,
+    primaryPhysician: "",
+    insuranceProvider: "",
+    insurancePolicyNumber:"",
+    allergies: "",
+    currentMedication: "",
+    familyMedicalHistory: "",
+    pastMedicalHistory: "",
+    identificationType: "",
+    identificationNumber: "",
+    identificationDocument: ""
+  }; */
 
  /*  const handleSubmit =  (values: FormValues, { setSubmitting }: any) => {
 

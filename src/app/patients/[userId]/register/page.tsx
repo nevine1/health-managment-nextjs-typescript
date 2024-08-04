@@ -32,11 +32,7 @@ const Register = ({ params: { userId } }: SearchParamProps) => {
             <p className="justify-items-end xl:text-left text-dark-600">
               &copy; 2024 CarePulse
             </p>
-            <Link  href="/?admin=true"
-              className="text-green-500 cursor-pointer"
-              >
-              Admin
-            </Link>
+           
           </div>
         </div>
       </section>
