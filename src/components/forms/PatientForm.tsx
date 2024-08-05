@@ -25,7 +25,6 @@ const PatientForm: React.FC = () => {
 
   
   const handleSubmit = async (values: FormValues, { setSubmitting }: any) => {
-
     try {
      
       const user = await createAccount({
@@ -33,7 +32,7 @@ const PatientForm: React.FC = () => {
             phone: values.phone,
             name: values.username,
           });
-         
+          
       if (user) {
         alert('User registered successfully');
         console.log(user);
@@ -137,7 +136,7 @@ const PatientForm: React.FC = () => {
                   type="submit"
                   variant="contained"
                   color="primary"
-                  size="large"
+                  size="larg"
                   disabled={isSubmitting}
                   className="w-full"
                 >

@@ -18,7 +18,9 @@ interface PropsValues{
                 Identification & Verification
             </h2>
         </div>
-            <FormControl variant="standard" className=" w-full mb-6">
+
+       
+            <FormControl variant="standard" className=" w-full mb-4">
                 <InputLabel id="demo-simple-select-standard-label">identificationType</InputLabel>
                 <Select
                 labelId="demo-simple-select-standard-label"
@@ -26,7 +28,7 @@ interface PropsValues{
                 value={selectedValue}
                 onChange={(e) =>setSelectedValue(e.target.value)}
                 label="Identification Type"
-               className="mb-6"
+               
                 >
                     
                 {

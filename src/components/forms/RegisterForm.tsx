@@ -8,17 +8,16 @@ import { TextField, FormLabel, Button, Box, Typography, Radio,
 
 import validationSchema from '../../lib/validationSchema';
 import DatePicker from "react-datepicker";
-
+import { createAccount } from '@/lib/actions/createAccount';
 import { getUser } from '@/lib/actions/patient.actions';
 import MedicalInfo from './MedicalInfo';
 import Identification from './Identification';
 import PersonalInfo from './PersonalInfo';
-import { FormValues } from '../../types/page'
-import { initialValues } from '../RegisterAction';
-import { createUser } from '../RegisterAction';
 import { useRouter } from 'next/navigation';
+import { FormValues } from '@/types/page';
+import { initialValues } from '@/asyncHealth/asyncRegister';
 const RegisterForm = () => {
-  const route = useRouter();
+    const router = useRouter();
   const [genderValue, setGenderValue] = useState('female');
   const [selectedDate, setSelectedDate ] = useState('')
   const [startDate, setStartDate] = useState(new Date());
@@ -28,17 +27,26 @@ const RegisterForm = () => {
   };
 
 
-  const handleSubmit = async (values: FormValues, { setSubmitting }: FormikHelpers<FormValues>) => {
+
+  const handleSubmit = async (values: FormValues, { setSubmitting }: any) => {
+    console.log('Form values:', values); // Debug: Check if form values are correct
     try {
-      await createUser(values);
-      //route.push('/patients/newPage')
-      route.push(`/appointment`)
+      const user = await createAccount(values);
+      console.log('User created:', user); // Debug: Check if user creation is successful
+      if (user) {
+        alert('User registered successfully');
+        router.push(`/appointments`);
+      } else {
+        alert('User registration failed');
+      }
     } catch (error) {
-      console.error('Error in handleSubmit:', error);
+      console.error('Handle Submit Error:', error);
+      alert('Failed to register user');
     } finally {
       setSubmitting(false);
     }
   };
+
   return (
     <Box
       sx={{
@@ -79,7 +87,7 @@ const RegisterForm = () => {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({ isSubmitting, handleChange, handleBlur, values, touched, errors }) => (
+          {({  isSubmitting, handleChange, handleBlur, values, touched, errors }) => (
             <Form className="p-2 rounded-md border-white">
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -41,7 +41,7 @@ const handleSubmit = () =>{
                   <TextField
                     fullWidth
                     id="username"
-                    name="name"
+                    name="username"
                     label="User name"
                     variant="standard"
                     value={values.username}

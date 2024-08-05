@@ -11,7 +11,8 @@ type Props = {}
 
 const Register = ({ params: { userId } }: SearchParamProps) => {
   const user = getUser(userId)
-  console.log(user)
+  console.log(user);
+  
   return (
     <div className="flex h-screen max-h-screen ">
       <section className="remove-scrollbar container my-auto">
@@ -32,7 +33,11 @@ const Register = ({ params: { userId } }: SearchParamProps) => {
             <p className="justify-items-end xl:text-left text-dark-600">
               &copy; 2024 CarePulse
             </p>
-           
+            <Link  href="/?admin=true"
+              className="text-green-500 cursor-pointer"
+              >
+              Admin
+            </Link>
           </div>
         </div>
       </section>

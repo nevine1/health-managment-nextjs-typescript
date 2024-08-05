@@ -39,6 +39,6 @@ const client = new Client()
 
 
 
-const account = new Account(client);
+export const account = new Account(client);
 
-export { account };
+// export { account };

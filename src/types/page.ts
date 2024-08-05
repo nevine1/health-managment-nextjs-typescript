@@ -24,8 +24,6 @@ export interface CustomFieldProps {
     renderSkeleton?: (field:any) => React.ReactNode,
 
 }
-
-
 export interface FormValues {
     username: string;
     email: string;

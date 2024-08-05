@@ -120,9 +120,7 @@ interface PropsValues{
                     error={touched.passMedicalHistory && Boolean(errors.passMedicalHistory)}
                     helperText={touched.passMedicalHistory && errors.passMedicalHistory}
                   />
-              
 
-                
 
           </div>
         </div>

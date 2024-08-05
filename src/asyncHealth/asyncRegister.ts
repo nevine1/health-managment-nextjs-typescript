@@ -1,4 +1,4 @@
-import { FormValues } from "@/types/page"
+import { FormValues } from '../../src/types/page'
 import { getUser } from "@/lib/actions/patient.actions";
 //import { createUser} from '../lib/actions/patient.actions';
 import { Client, Account, ID, Query  } from 'node-appwrite';
@@ -41,9 +41,9 @@ export const createUser = async (user: FormValues) => {
     try {
       const newUser = await account.create(
         ID.unique(), 
+        user.username,
         user.email, 
-        'password', // Replace with actual password handling if needed
-        user.username
+        
       );
       console.log('User created:', newUser);
   
@@ -58,22 +58,3 @@ export const createUser = async (user: FormValues) => {
   };
 
 
-  /* const values = {  username,
-email,
-phone,
-city,     
-birthday,
-gender,
-address,
-emergencyContactName,
-emergencyContactNumber,
-primaryPhysician,
-insuranceProvider,
-insurancePolicyNumber,
-allergies,
-currentMedication,
-familyMedicalHistory,
-pastMedicalHistory,
-identificationType,
-identificationNumber,
-identificationDocument } */
