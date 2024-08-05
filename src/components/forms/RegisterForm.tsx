@@ -15,8 +15,10 @@ import Identification from './Identification';
 import PersonalInfo from './PersonalInfo';
 import { FormValues } from '../../types/page'
 import { initialValues } from '../RegisterAction';
+import { createUser } from '../RegisterAction';
+import { useRouter } from 'next/navigation';
 const RegisterForm = () => {
-
+  const route = useRouter();
   const [genderValue, setGenderValue] = useState('female');
   const [selectedDate, setSelectedDate ] = useState('')
   const [startDate, setStartDate] = useState(new Date());
@@ -26,54 +28,17 @@ const RegisterForm = () => {
   };
 
 
-  /* const initialValues: FormValues = {
-    username: '',
-    email: '',
-    phone: '',
-    city: '',     // Initialize new field
-    birthday:'',
-    gender: " ",
-    address: " ",
-    emergencyContactName: " ",
-    emergencyContactNumber: null,
-    primaryPhysician: "",
-    insuranceProvider: "",
-    insurancePolicyNumber:"",
-    allergies: "",
-    currentMedication: "",
-    familyMedicalHistory: "",
-    pastMedicalHistory: "",
-    identificationType: "",
-    identificationNumber: "",
-    identificationDocument: ""
-  }; */
-
- /*  const handleSubmit =  (values: FormValues, { setSubmitting }: any) => {
-
+  const handleSubmit = async (values: FormValues, { setSubmitting }: FormikHelpers<FormValues>) => {
     try {
-      const user =  createAccount({
-        email: values.email,
-        phone: values.phone,
-        name: values.username,
-      });
-
-      if (user) {
-        alert('User registered successfully');
-        console.log(user);
-        route.push(`/patients/${user.userId}/register`)
-      } else {
-        alert('User registration failed');
-      }
+      await createUser(values);
+      //route.push('/patients/newPage')
+      route.push(`/appointment`)
     } catch (error) {
-      console.error("Handle Submit Error:", error);
-      alert('Failed to register user');
+      console.error('Error in handleSubmit:', error);
     } finally {
       setSubmitting(false);
     }
-  }; */
-const handleSubmit = () =>{
-  console.log('ehllo form ')
-}
+  };
   return (
     <Box
       sx={{

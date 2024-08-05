@@ -35,7 +35,7 @@ export interface FormValues {
     birthday: string;
     gender: string;
     emergencyContactName: string;
-    emergencyContactNumber: number | null;
+    emergencyContactNumber: string;
     primaryPhysician: string;
     insuranceProvider: string;
     insurancePolicyNumber:string;

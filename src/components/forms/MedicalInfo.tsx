@@ -120,30 +120,9 @@ interface PropsValues{
                     error={touched.passMedicalHistory && Boolean(errors.passMedicalHistory)}
                     helperText={touched.passMedicalHistory && errors.passMedicalHistory}
                   />
+              
 
-                <TextField
-                    id="identificationType"
-                    name="identificationType"
-                    label="Identification Type"
-                    variant="standard"
-                    value={values.identificationType}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    error={touched.identificationType && Boolean(errors.identificationType)}
-                    helperText={touched.identificationType && errors.identificationType}
-                  />
-
-                <TextField
-                    id="identificationNumber"
-                    name="identificationNumber"
-                    label="Identification Number"
-                    variant="standard"
-                    value={values.identificationNumber}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    error={touched.identificationNumber && Boolean(errors.identificationNumber)}
-                    helperText={touched.identificationNumber && errors.identificationNumber}
-                  />
+                
 
           </div>
         </div>
