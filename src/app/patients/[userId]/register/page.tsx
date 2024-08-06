@@ -5,7 +5,6 @@ import Logo from '../../../../../public/assets/icons/logo-full.svg'
 
 import Link from 'next/link'
 import RegisterForm from '@/components/forms/RegisterForm'
-import { getUser } from '@/lib/actions/patient.actions'
 import { useSearchParams } from 'next/navigation'
 type Props = {}
 

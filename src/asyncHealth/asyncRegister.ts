@@ -1,6 +1,4 @@
 import { FormValues } from '../../src/types/page'
-import { getUser } from "@/lib/actions/patient.actions";
-//import { createUser} from '../lib/actions/patient.actions';
 import { Client, Account, ID, Query  } from 'node-appwrite';
 import { PatientFormDefaultValues } from "@/lib/constants";
 

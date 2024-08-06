@@ -1,48 +1,39 @@
-"use client"
+"use client";
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import { Formik, Form } from 'formik';
+import { TextField, Button, Box, Typography } from '@mui/material';
 import validationSchema from '../../lib/validationSchema';
-import { createAccount } from "../../lib/actions/createAccount"
-import { useRouter } from 'next/navigation'
-import CustomTextField from './formsCustomFields/CustomTextField';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { createUser } from '../../lib/patientServices';
+
 interface FormValues {
   username: string;
   email: string;
   phone: string;
 }
 
-const PatientForm: React.FC = () => {
-  const route = useRouter();
+const PatientLoginForm: React.FC = () => {
+  const router = useRouter();
   const initialValues: FormValues = {
     username: '',
     email: '',
     phone: '',
   };
 
-  
   const handleSubmit = async (values: FormValues, { setSubmitting }: any) => {
     try {
-     
-      const user = await createAccount({
-            email: values.email,
-            phone: values.phone,
-            name: values.username,
-          });
-          
-      if (user) {
-        alert('User registered successfully');
-        console.log(user);
-        route.push(`/patients/${user.userId}/register`)
-      } else {
-        alert('User registration failed');
-      }
+      const newUser = await createUser({
+        email: values.email,
+        phone: values.phone,
+        username: values.username
+      });
+      console.log('User created successfully', newUser);
+      alert('Registration successful');
+      router.push('/appointments'); // Redirect to appointments page
     } catch (error) {
-      console.error("Handle Submit Error:", error);
-      alert('Failed to register user');
+      console.error('Error creating user', error);
+      alert('An error occurred. Please try again.');
     } finally {
       setSubmitting(false);
     }
@@ -56,7 +47,7 @@ const PatientForm: React.FC = () => {
         alignItems: 'center',
         justifyContent: 'center',
         maxHeight: '100vh',
-        border:'white',
+        border: 'white',
       }}
     >
       <Box
@@ -68,13 +59,13 @@ const PatientForm: React.FC = () => {
           boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
           backgroundColor: '#eff0f2'
         }}
-        className=" border-white "
+        className="border-white"
       >
-        <Typography component="h1" variant="h5" align="center" 
+        <Typography component="h1" variant="h5" align="center"
           gutterBottom
-          className="text-slate-900 text-[22px]"
-          >
-          Register
+          className="text-slate-900 text-[22px] mb-4"
+        >
+          New Patient Register Form
         </Typography>
         <Formik
           initialValues={initialValues}
@@ -82,7 +73,7 @@ const PatientForm: React.FC = () => {
           onSubmit={handleSubmit}
         >
           {({ isSubmitting, handleChange, handleBlur, values, touched, errors }) => (
-            <Form className="p-2 rounded-md border-white ">
+            <Form className="p-2 rounded-md border-white">
               <Box mb={2}>
                 <TextField
                   fullWidth
@@ -90,13 +81,11 @@ const PatientForm: React.FC = () => {
                   name="username"
                   label="Username"
                   variant="standard"
-                 /*  size="small" */
                   value={values.username}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   error={touched.username && Boolean(errors.username)}
                   helperText={touched.username && errors.username}
-                 
                 />
               </Box>
 
@@ -114,14 +103,12 @@ const PatientForm: React.FC = () => {
                   helperText={touched.email && errors.email}
                 />
               </Box>
-
-              <Box mb={2}>
+              <Box mb={4}>
                 <TextField
                   fullWidth
                   id="phone"
                   name="phone"
-                  label="phone"
-                  type="phone"
+                  label="Phone"
                   variant="standard"
                   value={values.phone}
                   onChange={handleChange}
@@ -130,18 +117,23 @@ const PatientForm: React.FC = () => {
                   helperText={touched.phone && errors.phone}
                 />
               </Box>
-              
-              <Box display="flex" justifyContent="center" className="w-full">
+
+              <Box display="flex" justifyContent="center" className="w-full mt-4">
                 <Button
                   type="submit"
                   variant="contained"
                   color="primary"
-                  size="larg"
                   disabled={isSubmitting}
                   className="w-full"
                 >
                   Register
                 </Button>
+              </Box>
+              <Box display="flex" justifyContent="center" className="w-full mt-4 text-gray-800">
+                Already have an account?
+                <Link href="/" className="text-blue-600 ml-2">
+                  Login
+                </Link>
               </Box>
             </Form>
           )}
@@ -151,4 +143,4 @@ const PatientForm: React.FC = () => {
   );
 };
 
-export default PatientForm;
+export default PatientLoginForm;

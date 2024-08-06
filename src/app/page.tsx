@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Logo from '../../public/assets/icons/logo-full.svg'
 import OnBoarding from '../../public/assets/imgs/onboarding-img.png'
-import PatientForm from '../components/forms/PatientForm'
+import PatientLoginForm from '../components/forms/PatientLoginForm'
 import Link  from "next/link";
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
           <Image src={Logo} alt="patient" width={1000} height={1000} className="w-fit mb-12 h-10"/>
 
           <div className="max-md:w-full max-width-[50%] flex-1">
-            <PatientForm />
+            <PatientLoginForm />
           </div>
 
           <div className="text-14-regular flex flex-between mt-20">

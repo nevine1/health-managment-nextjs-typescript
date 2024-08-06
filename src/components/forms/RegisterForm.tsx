@@ -8,8 +8,6 @@ import { TextField, FormLabel, Button, Box, Typography, Radio,
 
 import validationSchema from '../../lib/validationSchema';
 import DatePicker from "react-datepicker";
-import { createAccount } from '@/lib/actions/createAccount';
-import { getUser } from '@/lib/actions/patient.actions';
 import MedicalInfo from './MedicalInfo';
 import Identification from './Identification';
 import PersonalInfo from './PersonalInfo';
